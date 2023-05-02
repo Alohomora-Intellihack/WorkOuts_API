@@ -31,8 +31,7 @@ def biceps(n):
         img = detector.findPose(img)
         lmlist = detector.getPosition(img, draw= False)
         #print(lmlist[3])
-        
-        
+
         if len(lmlist)!=0:
             cv2.circle(img,(lmlist[17][1],lmlist[17][2]),20,(0,0,255),cv2.FILLED)
             cv2.circle(img,(lmlist[13][1],lmlist[13][2]),20,(0,255,0),cv2.FILLED) 
@@ -45,26 +44,27 @@ def biceps(n):
             elif length<0 and f==1:
                 f=0
                 count=count+1
-
-
             print(length)
 
             cTime = time.time()
             fps = 1/(cTime-pTime)
             pTime = cTime
-            cv2.putText(img,"Total Number of bicep curls  "+str(int(count)),(70,50),cv2.FONT_HERSHEY_DUPLEX,1,
-             cv2.putText(img,"Calories Burnt  "+str(int(count)*0.32),(70,150),cv2.FONT_HERSHEY_DUPLEX,1,
-            (60,100,255),1)
-            # img = cv2.resize(img, (600,600))                    # Resize image
+            cv2.putText(img, "Total Number of Bicep Curls  " + str(int(count)), (70, 250), cv2.FONT_HERSHEY_DUPLEX, 1,
+                        (60, 100, 255), 1)
+            cv2.putText(img, "Calories Burnt  " + str(int(count) * 1), (70, 350), cv2.FONT_HERSHEY_DUPLEX, 1,
+                        (60, 100, 255), 1)
+
+            img = cv2.resize(img, (600,600))                    # Resize image
             cv2.imshow("Image",img)
             calories = 0.4*count
+
             if cv2.waitKey(1) and count>n:
                 # cv2.destroyAllWindows()
                 cap.release()
                 cv2.destroyAllWindows()
                 break
-            
-            
+
+    return count, calories
             
         
         

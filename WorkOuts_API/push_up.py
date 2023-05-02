@@ -57,17 +57,14 @@ def pushup(n):
             (60,100,255),1)
             img = cv2.resize(img, (800,800))                    # Resize image
             cv2.imshow("Image",img)
+
+            calories = 0.29 * count
             
             if cv2.waitKey(1) and count>=n:
                 # cv2.destroyAllWindows()
                 cap.release()
                 cv2.destroyAllWindows()
                 break
-            
-            
-            calories = 0.29*count
-        
-        
-        
+
     return count,calories
 

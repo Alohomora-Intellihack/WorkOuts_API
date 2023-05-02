@@ -40,11 +40,12 @@ def squats():
     calories=0
     from squats import squats
     if request.method=="POST":
-        n=request.form.get('co')
-        count,calories = squats(int(n))
-    
+        data = request.get_json()
+        count_input = int(data['count'])
+        print("input count : ", count_input)
+        count, calories = squats(count_input)
 
-    return render_template('squats.html',count = count,calories = calories)
+    return {'count':count,'calories':calories}
 
 # @app.route('/video_feed')
 # def video_feed():
@@ -57,40 +58,42 @@ def pushups():
     if request.method=="POST":
         from push_up import pushup
         print("started")
-        n=request.form.get('co')
-        print(n)
-        count,calories = pushup(int(n))
+        data = request.get_json()
+        count_input = int(data['count'])
+        print("input count : ", count_input)
+        count, calories = pushup(count_input)
 
-    return render_template('pushup.html',count = count,calories = calories)
+    return {'count': count, 'calories': calories}
 
 @app.route('/pullup',methods=["POST","GET"])
 def pullup():
     count=0
-    calories=0
+    calories=1
+
     if request.method=="POST":
         from pull_up import pullup
         print("started")
-        n=request.form.get('co')
-        print("input count : ",n)
-        count,calories = pullup(1)
+        data = request.get_json()
+        count_input = int(data['count'])
+        print("input count : ",count_input)
+        count,calories = pullup(count_input)
 
     # return render_template('pullup.html',count = count,calories = calories)
     return {'count':count,'calories':calories}
 
 @app.route('/biceps',methods=["POST","GET"])
 def biceps():
-    
     count=0
     calories=0
     if request.method=="POST":
         from weight_lifting import biceps
         print("started")
-        n=request.form.get('co')
-        print(n)
-        count,calories = biceps(int(n))
-    
-    return render_template('weight_lifting.html',count = count,calories = calories)
+        data = request.get_json()
+        count_input = int(data['count'])
+        print("input count : ", count_input)
+        count, calories = biceps(count_input)
 
+    return {'count': count, 'calories': calories}
 
 @app.route('/crunches',methods=["POST","GET"])
 def crunches():
@@ -100,12 +103,12 @@ def crunches():
     if request.method=="POST":
         from crunches import crunches
         print("started")
-        n=request.form.get('co')
-        print(n)
-        count,calories = crunches(int(n))
-    
-    
-    return render_template('crunches.html',count = count,calories = calories)
+        data = request.get_json()
+        count_input = int(data['count'])
+        print("input count : ", count_input)
+        count, calories = crunches(count_input)
+
+    return {'count': count, 'calories': calories}
 
 @app.route('/count',methods=["POST","GET"])
 def count():
