@@ -37,6 +37,18 @@ def biceps(n):
             cv2.circle(img,(lmlist[13][1],lmlist[13][2]),20,(0,255,0),cv2.FILLED) 
             y1 = lmlist[17][2]
             y2 = lmlist[13][2]
+            angle = detector.findAngle(img, 11, 13, 15)
+
+            # Check if the angle is too high or too low
+            if angle > 160:
+                cv2.putText(img, "Reduce the angle", (70, 250), cv2.FONT_HERSHEY_DUPLEX, 1,
+                            (0, 0, 255), 3)
+            elif angle < 30:
+                cv2.putText(img, "Increase the angle", (70, 250), cv2.FONT_HERSHEY_DUPLEX, 1,
+                            (0, 0, 255), 3)
+            else:
+                cv2.putText(img, "The angle is Fine", (70, 250), cv2.FONT_HERSHEY_DUPLEX, 1,
+                            (0, 0, 255), 3)
             
             length = y2-y1
             if length>=0 and f==0:
@@ -67,7 +79,5 @@ def biceps(n):
     return count, calories
             
         
-        
-        
-        
-    return count,calories
+
+biceps(10)
